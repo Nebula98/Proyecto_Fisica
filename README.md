@@ -32,6 +32,4 @@ Este proyecto sirve como base para prácticas o demostraciones de conceptos de F
 - Mostrar gráficas en tiempo real.
 - Mejorar diseño responsive para móvil.
 
-## Autor
 
-Tu Nombre
