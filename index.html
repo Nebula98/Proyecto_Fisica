@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhysicsLab - Electromagnetismo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <canvas id="particle-bg" aria-hidden="true"></canvas>
+  <div class="scanline" aria-hidden="true"></div>
+  <div id="custom-cursor" aria-hidden="true"></div>
+
+  <nav class="navbar">
+    <button id="drawer-toggle" class="drawer-toggle" aria-label="Abrir navegación de módulos">Módulos</button>
+    <div class="brand">
+      <div class="atom-logo" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="6" class="nucleus"></circle>
+          <ellipse cx="50" cy="50" rx="34" ry="14" class="orbit orbit-a"></ellipse>
+          <ellipse cx="50" cy="50" rx="34" ry="14" class="orbit orbit-b"></ellipse>
+          <ellipse cx="50" cy="50" rx="34" ry="14" class="orbit orbit-c"></ellipse>
+        </svg>
+        <span class="electron e1"></span>
+        <span class="electron e2"></span>
+        <span class="electron e3"></span>
+      </div>
+      <div>
+        <h1>PhysicsLab</h1>
+        <p>Electromagnetismo</p>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#modulos">Módulos</a></li>
+      <li><a href="#derivaciones">Derivaciones</a></li>
+      <li><a href="#calculadora-maestra">Calculadora</a></li>
+      <li><a href="#visualizador">Visualizador</a></li>
+      <li><a href="#evaluacion">Evaluación</a></li>
+    </ul>
+    <div class="progress-wrap"><div id="scroll-progress"></div></div>
+  </nav>
+
+  <aside id="module-drawer" class="module-drawer">
+    <h3>Mapa de estudio</h3>
+    <a href="#modulos">5 Módulos temáticos</a>
+    <a href="#derivaciones">Derivaciones matemáticas</a>
+    <a href="#calculadora-maestra">Calculadora maestra</a>
+    <a href="#visualizador">Visualizador 2D</a>
+    <a href="#evaluacion">Sistema de evaluación</a>
+    <a href="#datos">Datos curiosos</a>
+  </aside>
+
+  <header class="hero reveal">
+    <div class="hero-copy">
+      <p class="kicker">Laboratorio Cuántico</p>
+      <h2>Domina el Electromagnetismo</h2>
+      <p class="hero-subtitle">Ruta activa: <span id="typewriter"></span></p>
+      <div class="hero-formula-wrap">
+        <div class="formula-burst" aria-hidden="true"></div>
+        <div class="hero-formula">F = kq1q2/r2</div>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#modulos">Comenzar a Estudiar</a>
+        <a class="btn btn-ghost" href="#evaluacion">Ir a Evaluación</a>
+      </div>
+      <div class="hero-stats">
+        <article>
+          <h4 data-counter="5">0</h4>
+          <p>Módulos Temáticos</p>
+        </article>
+        <article>
+          <h4 data-counter="12">0</h4>
+          <p>Calculadoras</p>
+        </article>
+        <article>
+          <h4 data-counter="40">0</h4>
+          <p>Preguntas</p>
+        </article>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <p>Marco teórico activo</p>
+      <ul>
+        <li>Superposición de campos</li>
+        <li>Divergencia y flujo eléctrico</li>
+        <li>Energía potencial de sistemas de cargas</li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar reveal">
+      <h3>Ruta de navegación</h3>
+      <a href="#modulos">Módulos</a>
+      <a href="#derivaciones">Derivaciones</a>
+      <a href="#calculadora-maestra">Calculadora maestra</a>
+      <a href="#visualizador">Visualizador de campo</a>
+      <a href="#evaluacion">Evaluación</a>
+      <a href="#datos">Datos curiosos</a>
+    </aside>
+
+    <div class="content">
+      <section id="modulos" class="section reveal">
+        <div class="section-head">
+          <p>Módulos teóricos y aplicados</p>
+          <h3>Programa completo</h3>
+        </div>
+        <div id="modules-grid" class="modules-grid"></div>
+      </section>
+
+      <section id="derivaciones" class="section reveal">
+        <div class="section-head">
+          <p>Derivaciones matemáticas formales</p>
+          <h3>Marco teórico de nivel universitario</h3>
+        </div>
+        <div class="derivation-grid">
+          <article class="panel gradient-border derivation-card">
+            <h4>1) Desde Coulomb puntual hasta campo radial</h4>
+            <p>Partiendo de la fuerza de interacción entre dos cargas puntuales:</p>
+            <pre class="math-block">F(r) = k * q1 * q2 / r^2</pre>
+            <p>Definiendo campo eléctrico como fuerza por unidad de carga de prueba:</p>
+            <pre class="math-block">E(r) = F/q0 = k * Q / r^2</pre>
+            <p>La dirección es radial con sentido saliente para Q mayor que 0 e entrante para Q menor que 0.</p>
+          </article>
+          <article class="panel gradient-border derivation-card">
+            <h4>2) Ley de Gauss para simetría esférica</h4>
+            <p>Con una superficie gaussiana esférica de radio r, E es constante sobre la superficie:</p>
+            <pre class="math-block">integral(E · dA) = E * 4*pi*r^2 = Qenc/eps0</pre>
+            <p>Despejando:</p>
+            <pre class="math-block">E(r) = Qenc / (4*pi*eps0*r^2)</pre>
+            <p>La expresión coincide con el resultado de Coulomb al usar k = 1/(4*pi*eps0).</p>
+          </article>
+          <article class="panel gradient-border derivation-card">
+            <h4>3) Potencial y energía desde el campo</h4>
+            <p>Para una carga puntual en trayectoria radial:</p>
+            <pre class="math-block">DeltaV = - integral(E · dr) = - integral(kQ/r^2 dr)</pre>
+            <pre class="math-block">V(r) = kQ/r + C</pre>
+            <p>Tomando V(infinito) = 0, C = 0 y la energía potencial queda:</p>
+            <pre class="math-block">U(r) = qV(r) = kQq/r</pre>
+          </article>
+        </div>
+      </section>
+
+      <section id="calculadora-maestra" class="section reveal">
+        <div class="section-head">
+          <p>Calculadora científica</p>
+          <h3>Calculadora maestra</h3>
+        </div>
+        <div class="master-grid">
+          <article class="panel gradient-border">
+            <label class="field-title" for="calc-type">Tipo de cálculo</label>
+            <select id="calc-type" class="select"></select>
+            <form id="dynamic-form" class="dynamic-form"></form>
+            <button id="solve-master" class="btn btn-primary" type="button">Calcular</button>
+            <div id="master-steps" class="steps" hidden></div>
+          </article>
+          <article class="panel gradient-border">
+            <h4>Resultado</h4>
+            <div id="master-result" class="result-value">--</div>
+            <p id="master-result-meta" class="result-meta">Sin cálculo todavía.</p>
+            <div class="master-actions">
+              <button id="copy-result" class="btn btn-ghost" type="button">Copiar resultado</button>
+              <button id="export-result" class="btn btn-ghost" type="button">Exportar imagen</button>
+            </div>
+            <h5>Historial reciente</h5>
+            <ul id="history-list" class="history-list"></ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="visualizador" class="section reveal">
+        <div class="section-head">
+          <p>Campo eléctrico y potencial interactivo</p>
+          <h3>Visualizador matemático</h3>
+        </div>
+        <p class="viz-hint">Arrastra las cargas con el mouse para ver cómo cambian las líneas de campo y el mapa de potencial en tiempo real.</p>
+        <div class="viz-grid">
+          <article class="panel gradient-border">
+            <h4>Líneas de campo 2D — interactivo</h4>
+            <canvas id="field-lines-canvas" width="720" height="320"></canvas>
+            <div class="viz-controls">
+              <button id="viz-add-pos" class="btn btn-ghost" type="button">+ Carga (+)</button>
+              <button id="viz-add-neg" class="btn btn-ghost" type="button">+ Carga (−)</button>
+              <button id="viz-reset" class="btn btn-ghost" type="button">Reiniciar</button>
+            </div>
+          </article>
+          <article class="panel gradient-border">
+            <h4>Mapa de potencial eléctrico</h4>
+            <canvas id="potential-map-canvas" width="720" height="320"></canvas>
+            <p class="viz-legend"><span class="leg-pos">Rojo = V positivo</span> &nbsp; <span class="leg-neg">Azul = V negativo</span></p>
+          </article>
+        </div>
+        <div class="table-wrap panel">
+          <h4>Campos eléctricos típicos</h4>
+          <table>
+            <thead><tr><th>Fenómeno</th><th>Magnitud aproximada</th><th>Orden cotidiano</th></tr></thead>
+            <tbody>
+              <tr><td>Membrana neuronal</td><td>7×10⁶ V/m</td><td>Bioseñal celular</td></tr>
+              <tr><td>Aire antes de ruptura</td><td>3×10⁶ V/m</td><td>Descarga atmosférica</td></tr>
+              <tr><td>Rayo</td><td>10⁸ V/m</td><td>Plasma natural</td></tr>
+              <tr><td>Acelerador lineal</td><td>10⁷ V/m</td><td>Investigación avanzada</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+
+
+      <section id="evaluacion" class="section reveal">
+        <div class="section-head">
+          <p>Sistema de evaluación completo</p>
+          <h3>Banco de 40 preguntas</h3>
+        </div>
+        <div class="quiz-toolbar panel">
+          <div>
+            <label for="quiz-mode">Modo</label>
+            <select id="quiz-mode" class="select">
+              <option value="practice">Práctica libre</option>
+              <option value="exam">Examen simulado</option>
+              <option value="review">Repaso de errores</option>
+              <option value="adaptive">Modo adaptativo</option>
+            </select>
+          </div>
+          <div>
+            <label for="quiz-category">Categoría</label>
+            <select id="quiz-category" class="select">
+              <option value="all">Todas</option>
+              <option value="conceptual">Conceptual</option>
+              <option value="calculo">Cálculo</option>
+              <option value="analisis">Análisis</option>
+              <option value="avanzado">Avanzado</option>
+            </select>
+          </div>
+          <button id="start-quiz" class="btn btn-primary" type="button">Iniciar</button>
+          <div class="timer-wrap" id="timer-wrap" hidden>
+            <svg width="64" height="64" viewBox="0 0 64 64">
+              <circle cx="32" cy="32" r="26" class="timer-bg"></circle>
+              <circle cx="32" cy="32" r="26" id="timer-ring" class="timer-ring"></circle>
+            </svg>
+            <span id="timer-text">30:00</span>
+          </div>
+        </div>
+        <div class="quiz-meta panel">
+          <p>XP: <span id="xp-read">0</span></p>
+          <p>Racha: <span id="streak-read">0</span> <span id="fire" class="fire">🔥</span></p>
+          <p>Nivel: <span id="badge-read">Aprendiz</span></p>
+          <p id="adaptive-focus" class="adaptive-focus">Foco adaptativo: pendiente</p>
+        </div>
+        <div class="category-progress panel">
+          <div><span>Conceptual</span><div class="bar"><i id="prog-conceptual"></i></div></div>
+          <div><span>Cálculo</span><div class="bar"><i id="prog-calculo"></i></div></div>
+          <div><span>Análisis</span><div class="bar"><i id="prog-analisis"></i></div></div>
+          <div><span>Avanzado</span><div class="bar"><i id="prog-avanzado"></i></div></div>
+        </div>
+        <article id="quiz-stage" class="panel quiz-stage"></article>
+      </section>
+
+      <section id="datos" class="section reveal">
+        <div class="section-head">
+          <p>Datos curiosos y contexto</p>
+          <h3>Escalas del mundo eléctrico</h3>
+        </div>
+        <div id="facts-grid" class="facts-grid"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>PhysicsLab - Electromagnetismo. Plataforma de estudio universitario y preparatoria avanzada.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
